@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.util.*;
 import com.toedter.calendar.JDateChooser;
 
-public class SignupOne extends JFrame{
+public class SignupOne extends JFrame implements ActionListener {
     
     JTextField nametext,fnametext,emailtext,citytext,pintext,addresstext;
     JComboBox drop;
@@ -14,12 +14,14 @@ public class SignupOne extends JFrame{
     JRadioButton male,female,trans,single,married,divorced;
     ButtonGroup radiogroup,maritalgroup;
     JButton next;
+
+    long random;
     
     //create the constructor
     SignupOne(){
         //creating a random form number.
         Random ran = new Random();
-        long random = Math.abs((ran.nextLong()%9000L)+1000L);
+        random = Math.abs((ran.nextLong()%9000L)+1000L);
         
         String [] states ={"Andhra Pradesh","Arunachal Pradesh","Assam",
         "Bihar","Chattisgarh","Goa","Gujrat","Haryana","Himachal Pradesh",
@@ -163,7 +165,7 @@ public class SignupOne extends JFrame{
         next.setFont(new Font("Raleway",Font.BOLD,14));
         next.setBounds(620, 660, 80, 30);
         add(next);
-        
+        next.addActionListener(this);
         
         getContentPane().setBackground(Color.WHITE);
         setSize(850,800);
@@ -174,6 +176,62 @@ public class SignupOne extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     public static void main(String args[]){
+
         new SignupOne();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String formno = ""+random; //long to string
+        String name = nametext.getText();
+        String fname = fnametext.getText();
+        String dob = ((JTextField)date.getDateEditor().getUiComponent()).getText();
+        //checking which radio button is selected
+        String gender = null;
+        if (male.isSelected()){
+            gender="Male";
+        }
+        else if(female.isSelected()){
+            gender="Female";
+        }
+        else if(trans.isSelected()){
+            gender="Transgender";
+        }
+        String email = emailtext.getText();
+        //checking the marital status
+        String marriage = null;
+        if(single.isSelected()){
+            marriage="Single";
+        } else if (married.isSelected()) {
+            marriage="Married";
+        } else if (divorced.isSelected()) {
+            marriage="Divorced";
+        }
+        String address = addresstext.getText();
+        String city = citytext.getText();
+        String state = drop.getSelectedItem().toString();
+        String pin = pintext.getText();
+
+        //hitting the database as it is an external entity
+        try{
+            //making sure required fields are filled
+            if(name.equals("")){
+                JOptionPane.showMessageDialog(null,"Name is required");
+            }if(dob.equals("")){
+                JOptionPane.showMessageDialog(null,"Date of Birth is required");
+            }if(gender.equals("")){
+                JOptionPane.showMessageDialog(null,"Gender is required");
+            }if(city.equals("")){
+                JOptionPane.showMessageDialog(null,"City is required");
+            }if(address.equals("")){
+                JOptionPane.showMessageDialog(null,"Address is required");
+            }if(state.equals("")){
+                JOptionPane.showMessageDialog(null,"State is required");
+            }if(pin.equals("")){
+                JOptionPane.showMessageDialog(null,"PIN is required");
+            }
+        }catch (Exception e1){
+            System.out.println(e1);
+        }
     }
 }
