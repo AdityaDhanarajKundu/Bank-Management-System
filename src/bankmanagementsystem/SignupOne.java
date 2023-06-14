@@ -6,6 +6,7 @@ import java.awt.event.*;
 import java.util.*;
 import com.toedter.calendar.JDateChooser;
 
+
 public class SignupOne extends JFrame implements ActionListener {
     
     JTextField nametext,fnametext,emailtext,citytext,pintext,addresstext;
@@ -229,6 +230,12 @@ public class SignupOne extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null,"State is required");
             }if(pin.equals("")){
                 JOptionPane.showMessageDialog(null,"PIN is required");
+            }
+            //creating the connection and writing the sql queries.
+            else{
+                Conn c = new Conn();
+                String query = "insert into signup values ('"+formno+"', '"+name+"', '"+fname+"', '"+dob+"', '"+gender+"', '"+email+"', '"+marriage+"', '"+address+"', '"+city+"', '"+state+"', '"+pin+"')";
+                c.s.executeUpdate(query);
             }
         }catch (Exception e1){
             System.out.println(e1);

@@ -104,7 +104,9 @@ public class Login extends JFrame implements ActionListener{
             pintext.setText("");
         }
         else if(ae.getSource()==signup){
-            
+            //close the login frame and open the signup frame.
+            setVisible(false);
+            new SignupOne().setVisible(true);
         }
     }
     public static void main (String args[]){

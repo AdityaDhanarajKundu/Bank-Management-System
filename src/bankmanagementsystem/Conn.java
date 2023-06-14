@@ -8,13 +8,13 @@ package bankmanagementsystem;
 import java.sql.*;
 public class Conn {
 
+    Connection c;
+    Statement s;
     public Conn(){
 
-        Connection c;
-        Statement s;
         try {
             c=DriverManager.getConnection("jdbc:mysql:///bankmanagementsystem","root","adityakundu");
-            s=c.createStatement();
+            s = c.createStatement();
         }
         catch (Exception e){
             System.out.println(e);
