@@ -171,7 +171,7 @@ public class SignupOne extends JFrame implements ActionListener {
         getContentPane().setBackground(Color.WHITE);
         setSize(850,800);
         setLocation(350,10);
-        setTitle("SignUp Form");
+        setTitle("NEW ACCOUNT APPLICATION FORM- PAGE 1");
         setLayout(null);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -236,6 +236,9 @@ public class SignupOne extends JFrame implements ActionListener {
                 Conn c = new Conn();
                 String query = "insert into signup values ('"+formno+"', '"+name+"', '"+fname+"', '"+dob+"', '"+gender+"', '"+email+"', '"+marriage+"', '"+address+"', '"+city+"', '"+state+"', '"+pin+"')";
                 c.s.executeUpdate(query);
+
+                setVisible(false);
+                new SignupTwo(formno).setVisible(true);
             }
         }catch (Exception e1){
             System.out.println(e1);
