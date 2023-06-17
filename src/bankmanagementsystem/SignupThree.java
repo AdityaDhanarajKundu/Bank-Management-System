@@ -4,14 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class SignupThree extends JFrame implements ActionListener {
 
     JRadioButton r1,r2,r3,r4;
     JCheckBox c1,c2,c3,c4,c5,c6,c7;
     JButton submit,cancel;
+    String formno;
 
-    SignupThree(){
+    SignupThree(String formno){
+
+        this.formno=formno;
 
         JLabel heading = new JLabel("Page 3 : Account Details");
         heading.setFont(new Font("Raleway",Font.BOLD,22));
@@ -138,7 +142,7 @@ public class SignupThree extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     public static void main(String[] args) {
-        new SignupThree();
+        new SignupThree("");
     }
 
     @Override
@@ -149,9 +153,53 @@ public class SignupThree extends JFrame implements ActionListener {
                 account_type = "Savings Account";
             } else if (r2.isSelected()) {
                 account_type="Fixed Deposit Account";
+            } else if (r3.isSelected()) {
+                account_type = "Current Account";
+            } else if (r4.isSelected()) {
+                account_type = "Recurring Deposit Account";
+            }
+
+            Random random = new Random();
+            String cardnumber = ""+Math.abs((random.nextLong()%90000000L+5040936000000000L));
+            String pinnumber = ""+Math.abs((random.nextLong()%9000L+1000L));
+
+            String facility = "";
+            if (c1.isSelected()){
+                facility+="ATM Card";
+            }if (c2.isSelected()){
+                facility+="Internet Banking";
+            }if(c3.isSelected()){
+                facility+="Mobile Banking";
+            }if(c4.isSelected()){
+                facility+="Email & SMS Alerts";
+            }if(c5.isSelected()){
+                facility+="Cheque Book";
+            }if (c6.isSelected()){
+                facility+="E-Statements";
+            }
+
+            try{
+                if(account_type.equals("")){
+                    JOptionPane.showMessageDialog(null,"Please select proper account.");
+                }
+                if(facility.equals("")){
+                    JOptionPane.showMessageDialog(null,"Select atleast one service.");
+                }
+                else{
+                    Conn c = new Conn();
+                    String query = "insert into signupthree values ('"+formno+"', '"+account_type+"', '"+cardnumber+"', '"+pinnumber+"', '"+facility+"')";
+                    c.s.executeUpdate(query);
+                    String query2 = "insert into login values ('"+formno+"', '"+cardnumber+"', '"+pinnumber+"')";
+                    c.s.executeUpdate(query2);
+
+                    JOptionPane.showMessageDialog(null,"Card Number : "+cardnumber+"\nPIN : "+pinnumber);
+                }
+            }
+            catch(Exception e1){
+                System.out.println(e1);
             }
         } else if (e.getSource()==cancel) {
-            
+            System.exit(0);
         }
     }
 }
