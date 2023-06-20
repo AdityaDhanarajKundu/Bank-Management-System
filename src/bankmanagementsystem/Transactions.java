@@ -8,7 +8,10 @@ import java.awt.event.ActionListener;
 public class Transactions extends JFrame implements ActionListener {
 
     JButton deposit,withdrawl,fastcash,ministatement,pinchange,balance,exit;
-    Transactions(){
+    String pin_number;
+    Transactions(String pin_number){
+
+        this.pin_number = pin_number;
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/atm.jpg"));
         Image i2= i1.getImage().getScaledInstance(900,900,Image.SCALE_DEFAULT);
@@ -67,7 +70,7 @@ public class Transactions extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Transactions();
+        new Transactions("");
     }
 
     @Override

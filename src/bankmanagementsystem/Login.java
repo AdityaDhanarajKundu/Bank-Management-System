@@ -6,6 +6,8 @@ package bankmanagementsystem;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+
 /**
  *
  * @author Aditya Dhanaraj
@@ -100,6 +102,20 @@ public class Login extends JFrame implements ActionListener{
             Conn c = new Conn();
             String card_number = cardtext.getText();
             String pin_number = pintext.getText();
+            String query = "select * from login where CardNo = '"+card_number+"' and Pin = '"+pin_number+"'";
+
+            try {
+                ResultSet rs = c.s.executeQuery(query);
+                if(rs.next()){
+                    setVisible(false);
+                    new Transactions(pin_number).setVisible(true);
+                }else {
+                    JOptionPane.showMessageDialog(null,"Incorrect Card Number or PIN");
+                }
+            }
+            catch (Exception e){
+                System.out.println(e);
+            }
         }
         else if(ae.getSource()==clear){
             cardtext.setText("");
