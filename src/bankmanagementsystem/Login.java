@@ -97,7 +97,9 @@ public class Login extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae){
         if (ae.getSource()==login){
-            
+            Conn c = new Conn();
+            String card_number = cardtext.getText();
+            String pin_number = pintext.getText();
         }
         else if(ae.getSource()==clear){
             cardtext.setText("");
