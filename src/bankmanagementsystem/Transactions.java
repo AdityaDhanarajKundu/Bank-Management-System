@@ -22,6 +22,7 @@ public class Transactions extends JFrame implements ActionListener {
 
         JLabel text = new JLabel("Please select your Transaction");
         text.setBounds(215,300,700,35);
+        text.setForeground(Color.WHITE);
         text.setFont(new Font("System",Font.BOLD,16));
         image.add(text);
 
@@ -83,6 +84,9 @@ public class Transactions extends JFrame implements ActionListener {
         } else if (e.getSource()==withdrawl) {
             setVisible(false);
             new Withdraw(pin_number).setVisible(true);
+        } else if (e.getSource()==fastcash) {
+            setVisible(false);
+            new FastCash(pin_number).setVisible(true);
         }
     }
 }
