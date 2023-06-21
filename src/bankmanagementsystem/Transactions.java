@@ -62,7 +62,7 @@ public class Transactions extends JFrame implements ActionListener {
 
         setSize(900,900);
         setLocation(300,0);
-        setTitle("NEW ACCOUNT APPLICATION FORM- PAGE 3");
+        setTitle("Main Transaction Frame");
         setLayout(null);
 //        setUndecorated(true);
         setVisible(true);
@@ -77,6 +77,12 @@ public class Transactions extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==exit){
             System.exit(0);
+        } else if (e.getSource()==deposit) {
+            setVisible(false);
+            new Deposit(pin_number).setVisible(true);
+        } else if (e.getSource()==withdrawl) {
+            setVisible(false);
+            new Withdraw(pin_number).setVisible(true);
         }
     }
 }
