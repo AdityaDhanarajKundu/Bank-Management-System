@@ -16,8 +16,10 @@ public class Login extends JFrame implements ActionListener{
     JButton login,clear,signup;
     JTextField cardtext;
     JPasswordField pintext;
+
     //creating the constructor to create the login frame.
     Login(){
+
         //seting the properties of the JFrame
         setTitle("AUTOMATED TELLER MACHINE");
         setLayout(null);

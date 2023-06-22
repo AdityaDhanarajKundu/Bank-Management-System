@@ -13,6 +13,7 @@ public class SignupThree extends JFrame implements ActionListener {
     JButton submit,cancel;
     String formno;
 
+
     SignupThree(String formno){
 
         this.formno=formno;
